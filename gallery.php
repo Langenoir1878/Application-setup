@@ -8,59 +8,57 @@
 
 //echo "gallery";
 ?>
+<!DOCTYPE html>
+<style>
+.lay_content {
+    background-image: url("bg.png");
+    background-size: 1878px 1245px;
+    background-color: black;
+ 	font-style: oblique;
+    padding: 187px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+</style>
 
-<html>
+<html lang="en">
 <head><title>Gallery</title>
+<br>
+<h1><font color = "#00FF00"> &nbsp; Image Gallery</font></h1>
+<br><br>
 </head>
-<body>
+<body class="lay_content">
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<p><font color ="white"><h3 align = "center">php code to display images from s3 bucket goes here
 
-<?php
-session_start();
-$email = $_POST["email"];
-echo $email;
 
-//require 'vendor/autoload.php';
 
-use Aws\Rds\RdsClient;
-$client = RdsClient::factory(array(
-'region'  => 'us-east-1'
-));
 
-$result = $client->describeDBInstances(array(
-    'DBInstanceIdentifier' => 'itmo544jrhdb',
-));
 
-$endpoint = "";
 
-foreach ($result->getPath('DBInstances/*/Endpoint/Address') as $ep) {
-    // Do something with the message
-    echo "============". $ep . "================";
-    $endpoint = $ep;
-}   
-//echo "begin database";
-$link = mysqli_connect($endpoint,"controller","ilovebunnies","itmo544db") or die("Error " . mysqli_error($link));
 
-/* check connection */
-if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-}
 
-//below line is unsafe - $email is not checked for SQL injection -- don't do this in real life or use an ORM instead
-$link->real_query("SELECT * FROM items WHERE email = '$email'");
-//$link->real_query("SELECT * FROM items");
-$res = $link->use_result();
-echo "Result set order...\n";
-while ($row = $res->fetch_assoc()) {
-    echo "<img src =\" " . $row['s3rawurl'] . "\" /><img src =\"" .$row['s3finishedurl'] . "\"/>";
-echo $row['id'] . "Email: " . $row['email'];
-}
-$link->close();
-?>
+
+
+
+
+
+
+</h3></font></p>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div align = "center">
+<br><font color = "#00FF00"><?php
+    //displaying the time
+    date_default_timezone_set('America/Chicago');
+            $myDate = date('j M Y - h:i:s A');
+    
+            print "CURRENT TIME: ". $myDate. " | EpochSeconds";
+    ?></font>
+    <br><br>
+</div>
 </body>
 </html>
 
 
 
-
-?>
