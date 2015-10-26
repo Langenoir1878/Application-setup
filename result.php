@@ -27,7 +27,9 @@ if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
 echo 'Here is some more debugging info:';
 print_r($_FILES);
 print "</pre>";
+
 require 'vendor/autoload.php';
+
 #use Aws\S3\S3Client;
 #$client = S3Client::factory();
 $s3 = new Aws\S3\S3Client([
@@ -76,8 +78,9 @@ $result = $rds->describeDBInstances([
    # 'Marker' => '<string>',
    # 'MaxRecords' => <integer>,
 ]);
-$endpoint = $result['DBInstances']['Endpoint']['Address']
-    echo "============\n". $endpoint . "================";^M
+$endpoint = $result['DBInstances']['Endpoint']['Address'];
+
+    echo "============\n". $endpoint . "================";
 //echo "begin database";^M
 $link = mysqli_connect($endpoint,"controller","letmein888","customerrecords") or die("Error " . mysqli_error($link));
 /* check connection */
