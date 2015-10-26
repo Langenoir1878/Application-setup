@@ -18,7 +18,8 @@
 session_start();
 $email = $_POST["email"];
 echo $email;
-require 'vendor/autoload.php';
+
+//require 'vendor/autoload.php';
 
 use Aws\Rds\RdsClient;
 $client = RdsClient::factory(array(

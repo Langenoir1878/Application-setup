@@ -80,6 +80,7 @@ Enter Email of user for gallery to browse: </font><input type="email" name="emai
 </form>
 
 </div>
+<br><br><br><br>
 </body>
 </html>
 
