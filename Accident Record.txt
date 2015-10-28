@@ -1,4 +1,6 @@
-Accident Record
+Accident record 
+
+
 
 AWS account closed by on-purposed prank after previous aws account username and password info leak for academic practice exchange in Week 2.
 
@@ -9,9 +11,20 @@ Re-creating s3 bucket and images path for previous Assignment 4 & 5
 
 
 ***
-Just a few WARNING messages to those who might overestimated himself and trying to steal authentications and works from other people: 1. You will be responsible for any single loss caused by your stupidity; 2. Don't blame others for not forgiving you, that earns you a even worse reputaion; 3. WE ARE NO KIDS ANYMORE, TRY SOME BETTER REVENGE INSTEAD OF BEING CHILDISH!!!
+Just a few WARNING messages to those who might overestimated himself and trying to steal authentications and works from other people: 
+
+1. You will be responsible for any single loss caused by your stupidity; 
+
+2. Don't blame others for not forgiving you, that earns you a even worse reputaion; 
+
+3. WE ARE NO KIDS ANYMORE, TRY SOME BETTER REVENGE INSTEAD OF BEING CHILDISH!!!
+
+4. DO NOT COPY ANY PERSONAL CODES from my Github repos 
+   Authentication violations won't be toleranted.
 
 
-Oct 28th, 2015
 
-All rights reserved in this github account for Yiming Zhang, authentication violations won't be toleranted.
+DATE: Oct 28th, 2015
+
+All rights reserved associated with this github account for Yiming Zhang
+
