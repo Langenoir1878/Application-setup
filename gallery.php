@@ -1,3 +1,10 @@
+<?php
+/* Yiming ZHANG ITMO 544-01 MP-1
+ * Gallery.php
+ */
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,13 +46,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">I'm a random button</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="#">I'm also a random button</a>
                     </li>
                     <li>
                         <a href="index.php">INDEX</a>
@@ -66,7 +73,7 @@
         <div class="row">
 
             <div class="col-lg-12">
-                <h1 class="page-header">Thumbnail Gallery</h1>
+               <font color = "#00FF00"> <h1 class="page-header"> Photo Gallery </h1> </font>
             </div>
 
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
@@ -137,7 +144,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Yiming ZHANG ITMO 544 MP 2015</p>
+                    <font color = "white" ><p>Copyright &copy; Yiming ZHANG ITMO 544 MP 2015</p></font>
                 </div>
             </div>
         </footer>
