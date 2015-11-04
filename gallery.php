@@ -26,7 +26,7 @@
 
 </head>
 
-<body bachground = "bg.png">
+<body background = "bg.png">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -48,7 +48,7 @@
                         <a href="#">About</a>
                     </li>
                     <li>
-                        <a href="index_MP1.php">INDEX</a>
+                        <a href="index.php">INDEX</a>
                     </li>
                     <li>
                         <a href="profile.php">PROFILE</a>
