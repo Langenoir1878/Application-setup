@@ -6,7 +6,8 @@
  * Oct 25th, 2015
  * Yiming Zhang
  * ITMO 544 MP 1
- *
+ * updated passwords & username
+ * Nov 4, 2015
  */
 
 
@@ -36,7 +37,7 @@ $s3 = new Aws\S3\S3Client([
     'version' => 'latest',
     'region'  => 'us-east-1'
 ]);
-$bucket = uniqid("php-jrh-",false);
+$bucket = uniqid("ln1878bucket-",false);
 #$result = $client->createBucket(array(
 #    'Bucket' => $bucket
 #));
@@ -67,7 +68,7 @@ $rds = new Aws\Rds\RdsClient([
     'region'  => 'us-east-1'
 ]);
 $result = $rds->describeDBInstances([
-    'DBInstanceIdentifier' => 'mp1-jrh',
+    'DBInstanceIdentifier' => 'SIMMON-THE-CAT-DB',
     #'Filters' => [
     #    [
     #        'Name' => '<string>', // REQUIRED
@@ -82,7 +83,7 @@ $endpoint = $result['DBInstances']['Endpoint']['Address'];
 
     echo "============\n". $endpoint . "================";
 //echo "begin database";^M
-$link = mysqli_connect($endpoint,"controller","letmein888","customerrecords") or die("Error " . mysqli_error($link));
+$link = mysqli_connect($endpoint,"LN1878","hesaysmeow","3306") or die("Error " . mysqli_error($link));
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
