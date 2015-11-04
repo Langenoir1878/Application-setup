@@ -42,7 +42,7 @@ session_start(); ?>
         <font color = "#FFFFFF"><h1> ITMO 544 MP-1 Y.Z. </h1></font>
     </div>
     <div class = "left_side">
-<!-- The data encoding type, enctype, MUST be specified as below -->
+
 <form enctype="multipart/form-data" action="result.php" method="POST">
     <!-- MAX_FILE_SIZE must precede the file input field -->
     <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
@@ -58,8 +58,8 @@ Enter Phone of user (1-XXX-XXX-XXXX): </font><input type="phone" name="phone">
 <input type="submit" value="Send File" />
 <br><br><br>
 </form>
-<hr />
-<!-- The data encoding type, enctype, MUST be specified as below -->
+<br>
+
 <form enctype="multipart/form-data" action="gallery.php" method="POST">
   
   <br><font color = "white">  
