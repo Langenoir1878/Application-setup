@@ -46,7 +46,7 @@
 <link rel="stylesheet" type="text/css" href="stylesheet.css" title="Style">
 
 <div align = "center">
-	<p><font face= "verdana" size = "2"> &nbsp; ITMO 544-01 AS-2 Photo Gallery App </font></p>
+	<p><font face= "verdana" size = "2"> &nbsp; ITMO 544-01 MP-1 Photo Gallery App </font></p>
 	<p><font face= "verdana" size = "2"> &nbsp; Fall 2015 Oct-Nov </font></p>
 	<p><font face= "verdana" size = "2"> &nbsp; UID: A20296055</font></p>
 	<br>
