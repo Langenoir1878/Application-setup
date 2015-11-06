@@ -111,7 +111,10 @@ $RAWS3URL = $url; //obtained from far above..
 $IMGNAME = basename($_FILES['userfile']['name']);
 $FINISHEDS3URL = "none";
 $STATE =0;
-$TIMESTR= "Current time: " . date("Y-m-d H:i:s");
+
+date_default_timezone_set('America/Chicago');
+            #$myDate = date('j M Y - h:i:s A');
+$TIMESTR= "Current time: " . date('j M Y - h:i:s A');
 
 $stmt->bind_param("ssssssis",$USERNAME, $EMAIL,$PHONE,$RAWS3URL,$IMGNAME,$FINISHEDS3URL,$STATE,$TIMESTR);
 
