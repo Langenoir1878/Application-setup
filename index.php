@@ -52,7 +52,7 @@ session_start(); ?>
     <br><br><font color = "white">
 Enter Email of user: </font><input type="email" name="useremail"><br />
 	<br><br><font color = "white">
-Enter Phone of user (1-XXX-XXX-XXXX): </font><input type="phone" name="phone">
+Enter Phone of user: </font><input type="phone" name="phone">
 
 
 <input type="submit" value="Send File" />
