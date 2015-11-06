@@ -19,6 +19,7 @@ session_start();
 echo $_POST['useremail'];
 $uploaddir = '/tmp/';
 $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
+$fname = $_FILES['userfile']['name'];
 echo '<pre>';
 if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
     echo "File is valid, and was successfully uploaded.\n";
@@ -33,11 +34,14 @@ require 'vendor/autoload.php';
 
 #use Aws\S3\S3Client;
 #$client = S3Client::factory();
+
 $s3 = new Aws\S3\S3Client([
     'version' => 'latest',
     'region'  => 'us-east-1'
 ]);
+
 $bucket = uniqid("ln1878bucket-",false);
+
 #$result = $client->createBucket(array(
 #    'Bucket' => $bucket
 #));
@@ -46,6 +50,7 @@ $result = $s3->createBucket([
     'ACL' => 'public-read',
     'Bucket' => $bucket
 ]);
+
 #$client->waitUntilBucketExists(array('Bucket' => $bucket));
 #Old PHP SDK version 2
 #$key = $uploadfile;
@@ -56,17 +61,21 @@ $result = $s3->createBucket([
 #    'SourceFile' => $uploadfile 
 #));
 # PHP version 3
-$result = $client->putObject([
+$result = $s3->putObject([
     'ACL' => 'public-read',
     'Bucket' => $bucket,
-   'Key' => $uploadfile
+    'Key' => $fname,
+    'SourceFile' => $uploadfile
 ]);  
-$url = $result['ObjectURL'];
+
+$url = $result['ObjectURL']; // store to be used later...
 echo $url;
+
 $rds = new Aws\Rds\RdsClient([
     'version' => 'latest',
     'region'  => 'us-east-1'
 ]);
+
 $result = $rds->describeDBInstances([
     'DBInstanceIdentifier' => 'SIMMON-THE-CAT-DB',
     #'Filters' => [
@@ -79,39 +88,49 @@ $result = $rds->describeDBInstances([
    # 'Marker' => '<string>',
    # 'MaxRecords' => <integer>,
 ]);
-$endpoint = $result['DBInstances']['Endpoint']['Address'];
+
+$endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 
     echo "============\n". $endpoint . "================";
 //echo "begin database";^M
-$link = mysqli_connect($endpoint,"LN1878","hesaysmeow","3306") or die("Error " . mysqli_error($link));
+$link = mysqli_connect($endpoint,"LN1878","hesaysmeow","SIMMON-THE-CAT-DB") or die("Error " . mysqli_error($link));
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
 /* Prepared statement, stage 1: prepare */
-if (!($stmt = $link->prepare("INSERT INTO items (id, email,phone,filename,s3rawurl,s3finishedurl,status,issubscribed) VALUES (NULL,?,?,?,?,?,?,?)"))) {
+if (!($stmt = $link->prepare("INSERT INTO CAT_TABLE (USERNAME,EMAIL,PHONE,RAWS3URL,FINISHEDS3URL,IMGNAME,STATE,TIMESTR) VALUES (?,?,?,?,?,?,?,?)"))) {
     echo "Prepare failed: (" . $link->errno . ") " . $link->error;
 }
-$email = $_POST['useremail'];
-$phone = $_POST['phone'];
-$s3rawurl = $url; //  $result['ObjectURL']; from above
-$filename = basename($_FILES['userfile']['name']);
-$s3finishedurl = "none";
-$status =0;
-$issubscribed=0;
-$stmt->bind_param("sssssii",$email,$phone,$filename,$s3rawurl,$s3finishedurl,$status,$issubscribed);
+
+$USERNAME = "Y. Z. LN1878";
+$EMAIL = $_POST['useremail'];
+$PHONE = $_POST['phone']; 
+$RAWS3URL = $url; //obtained from far above..
+$IMGNAME = basename($_FILES['userfile']['name']);
+$FINISHEDS3URL = "none";
+$STATE =0;
+$TIMESTR= "Current time: " . date("Y-m-d H:i:s");
+
+$stmt->bind_param("ssssssis",$USERNAME, $EMAIL,$PHONE,$RAWS3URL,$IMGNAME,$FINISHEDS3URL,$STATE,$TIMESTR);
+
+
 if (!$stmt->execute()) {
     echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 }
 printf("%d Row inserted.\n", $stmt->affected_rows);
 /* explicit close recommended */
 $stmt->close();
-$link->real_query("SELECT * FROM items");
+
+//display all records
+$link->real_query("SELECT * FROM CAT_TABLE");
+
 $res = $link->use_result();
+
 echo "Result set order...\n";
 while ($row = $res->fetch_assoc()) {
-    echo $row['id'] . " " . $row['email']. " " . $row['phone'];
+    echo $row['ID'] . " " . $row['EMAIL']. " " . $row['PHONE'];
 }
 $link->close();
 //add code to detect if subscribed to SNS topic 
