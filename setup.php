@@ -10,14 +10,16 @@
 
 
 // Start the session^M
-//require 'vendor/autoload.php';
-//$rds = new Aws\Rds\RdsClient([
-  //  'version' => 'latest',
-    //'region'  => 'us-east-1'
-//]);
+require 'vendor/autoload.php';
+$rds = new Aws\Rds\RdsClient([
+    'version' => 'latest',
+    'region'  => 'us-east-1'
+]);
+
+
 $result = $rds->createDBInstance([
-  //  'AllocatedStorage' => 10,
-    #'AutoMinorVersionUpgrade' => true || false,
+    'AllocatedStorage' => 10,
+    'AutoMinorVersionUpgrade' => true || false,
     #'AvailabilityZone' => '<string>',
     #'BackupRetentionPeriod' => <integer>,
    # 'CharacterSetName' => '<string>',
@@ -45,9 +47,9 @@ $result = $rds->createDBInstance([
     #'Port' => <integer>,
     #'PreferredBackupWindow' => '<string>',
     #'PreferredMaintenanceWindow' => '<string>',
-    'PubliclyAccessible' => true,
-    #'StorageEncrypted' => true || false,
-    #'StorageType' => '<string>',
+   'PubliclyAccessible' => true,
+   #'StorageEncrypted' => true || false,
+   #'StorageType' => '<string>',
    # 'Tags' => [
    #     [
    #         'Key' => '<string>',
@@ -59,6 +61,7 @@ $result = $rds->createDBInstance([
     #'TdeCredentialPassword' => '<string>',
    # 'VpcSecurityGroupIds' => ['<string>', ...],
 ]);
+
 print "Create RDS DB results: \n";
 # print_r($rds);
 $result = $rds->waitUntil('DBInstanceAvailable',['DBInstanceIdentifier' => 'SIMMON-THE-CAT-DB']);
@@ -71,15 +74,20 @@ $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 print "============\n". $endpoint . "================\n";
 
 
-$link = mysqli_connect($endpoint,"LN1878","hesaysmeow","3306") or die("Error " . mysqli_error($link)); 
-echo "Here is the result: " . $link;
-$sql = "CREATE TABLE comments 
+$link = new mysqli($endpoint,"LN1878","hesaysmeow","SIMMON-THE-CAT-DB", 3306) or die("Error " . mysqli_error($link)); 
+#echo "Here is the result: " . $link;
+$sqlSTETEMENTstr="CREATE TABLE CAT_TABLE 
 (
 ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-PosterName VARCHAR(32),
-Title VARCHAR(32),
-Content VARCHAR(500)
-)";
+USERNAME VARCHAR(32),
+EMAIL VARCHAR(100),
+PHONE VARCHAR(30),
+RAWS3URL VARCHAR(500),
+FINISHEDS3URL VARCHAR(500),
+IMGNAME VARCHAR(100),
+STATE TINYINT(3) CHECK(STATE IN (0,1,2)),
+TIMESTR VARCHAR(50) 
+)");
 
-$con->query($sql);
+$con->query($sqlSTETEMENTstr);
 ?>
