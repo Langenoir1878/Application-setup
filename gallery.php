@@ -1,7 +1,39 @@
 <?php
 /* Yiming ZHANG ITMO 544-01 MP-1
  * Gallery.php
+ * Last updated: Nov 6,2015
  */
+
+session_start();
+$email = $POST["email"]
+require 'vendor/autoload.php';
+
+use Aws\Rds\RdsClient;
+$client = RdsClient::factory([
+'version' => 'latest',
+'region'  => 'us-east-1'
+
+]);
+
+$result = $client->describeDBInstances([
+    'DBInstanceIdentifier' => 'SIMMION-THE-CAT-DB'
+]);
+
+$endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
+
+$link = mysqli_connect($endpoint,"LN1878","hesaysmeow","SIMMON-THE-CAT-DB") or die("Error " . mysqli_error($link));
+//check connection
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
+
+//to be add =======================SELECT STATEMENT TO DISPLAY IMGS===============================================
+//retrieving data from db, table name: CAT_TABLE
+//NOTICE DIFFERENT FIELD NAMES: send - useremail - COLUMN "EMAIL"; retrieve - email - same column in db
+
+
+
 ?>
 
 
@@ -78,7 +110,7 @@
     require 'vendor/autoload.php';
 
 
-?>
+    ?>
 
     <!-- Page Content -->
     <div class="container">
