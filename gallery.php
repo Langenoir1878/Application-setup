@@ -32,6 +32,18 @@ if (mysqli_connect_errno()) {
 //retrieving data from db, table name: CAT_TABLE
 //NOTICE DIFFERENT FIELD NAMES: send - useremail - COLUMN "EMAIL"; retrieve - email - same column in db
 
+$link->real_query("SELECT * FROM CAT_TABLE WHERE EMAIL = '$email'");
+
+$res = $link->use_result();
+//echo "Result set order...\n";
+while ($row = $res->fetch_assoc()) {
+$urlINFO = "<img src =\" " . $row['RAWS3URL'] . "\" /><img src =\"" .$row['FINISHEDS3URL'] . "\"/>";
+//echo $urlINFO;
+$imageSTR = $row['ID'] . "Email: " . $row['EMAIL']; //to be used into CSS containers
+//echo $imageSTR;
+}
+
+$link->close();
 
 
 ?>
