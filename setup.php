@@ -74,7 +74,7 @@ $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 print "============\n". $endpoint . "================\n";
 
 
-$link = new mysqli($endpoint,"LN1878","hesaysmeow","SIMMON-THE-CAT-DB", 3306) or die("Error " . mysqli_error($link)); 
+$link = new mysqli($endpoint,"LN1878","hesaysmeow","simmoncatdb", 3306) or die("Error " . mysqli_error($link)); 
 #echo "Here is the result: " . $link;
 $sqlSTETEMENTstr="CREATE TABLE CAT_TABLE 
 (

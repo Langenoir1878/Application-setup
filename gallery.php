@@ -21,7 +21,7 @@ $result = $client->describeDBInstances([
 
 $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 
-$link = mysqli_connect($endpoint,"LN1878","hesaysmeow","SIMMON-THE-CAT-DB") or die("Error " . mysqli_error($link));
+$link = mysqli_connect($endpoint,"LN1878","hesaysmeow","simmoncatdb") or die("Error " . mysqli_error($link));
 //check connection
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
