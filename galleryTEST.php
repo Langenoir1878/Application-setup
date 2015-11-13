@@ -15,15 +15,16 @@ $email = $POST["email"]
 require 'vendor/autoload.php';
 
 use Aws\Rds\RdsClient;
-$client = RdsClient::factory([
+# updated Nov 13 for simple testing basic outcomes
+$client = RdsClient::factory(array
 'version' => 'latest',
 'region'  => 'us-east-1'
 
-]);
+));
 
-$result = $client->describeDBInstances([
+$result = $client->describeDBInstances(array(
     'DBInstanceIdentifier' => 'SIMMION-THE-CAT-DB'
-]);
+));
 
 $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 
@@ -43,6 +44,7 @@ $link->real_query("SELECT * FROM CAT_TABLE WHERE EMAIL = '$email'");
 $res = $link->use_result();
 //echo "Result set order...\n";
 while ($row = $res->fetch_assoc()) {
+    #adding effects here
 $urlINFO = "<img src =\" " . $row['RAWS3URL'] . "\" /><img src =\"" .$row['FINISHEDS3URL'] . "\"/>";
 //echo $urlINFO;
 $imageSTR = $row['ID'] . "Email: " . $row['EMAIL']; //to be used into CSS containers
@@ -53,3 +55,5 @@ $link->close();
 
 
 ?>
+</body>
+</html>
