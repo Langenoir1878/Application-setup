@@ -26,7 +26,7 @@ session_start();
     background-size: 1200px 571px;
     background-color: black;
     font-style: oblique;
-    padding: 187px;
+    padding: 57px;
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 10px;
@@ -46,7 +46,7 @@ session_start();
 
 <body>
 <div class = "lay_content">
-    <h1>File Uploading Result</h1>
+   <font color = "white"> <h1>File Uploading Result</h1></font>
     <font color = "white"><a href = "index.php">Go back to the INDEX </a></font>
 </div>
 
