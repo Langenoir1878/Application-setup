@@ -71,7 +71,7 @@ session_start();
      <!--DB connection-->
     <?php 
 
-    $email = $POST["email"]
+    $email = $POST["email"];
     require 'vendor/autoload.php';
 
     use Aws\Rds\RdsClient;
