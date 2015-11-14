@@ -102,9 +102,9 @@ session_start();
     while ($row = $res->fetch_assoc()) {
         #adding effects here
     $urlINFO = "<img src =\" " . $row['RAWS3URL'] . "\" /><img src =\"" .$row['FINISHEDS3URL'] . "\"/>";
-    //echo $urlINFO;
+    echo $urlINFO;
     $imageSTR = $row['ID'] . "Email: " . $row['EMAIL']; //to be used into CSS containers
-    //echo $imageSTR;
+    echo $imageSTR;
     }
 
     $link->close();
