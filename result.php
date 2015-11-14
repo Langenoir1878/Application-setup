@@ -87,20 +87,20 @@ $result = $client->createBucket(array(
 
 $client->waitUntilBucketExists(array('Bucket' => $bucket));
 #Old PHP SDK version 2
-$key = $uploadfile;
-$result = $client->putObject(array(
-    'ACL' => 'public-read',
-    'Bucket' => $bucket,
-    'Key' => $key,
-    'SourceFile' => $uploadfile 
+#$key = $uploadfile;
+#$result = $client->putObject(array(
+#    'ACL' => 'public-read',
+ #   'Bucket' => $bucket,
+  #  'Key' => $key,
+   # 'SourceFile' => $uploadfile 
 ));
 # PHP version 3
-#$result = $s3->putObject([
- #   'ACL' => 'public-read',
-  #  'Bucket' => $bucket,
-   # 'Key' => $fname,
-    #'SourceFile' => $uploadfile
-#]);  
+$result = $s3->putObject([
+    'ACL' => 'public-read',
+    'Bucket' => $bucket,
+    'Key' => $fname,
+    'SourceFile' => $uploadfile
+]);  
 
 $url = $result['ObjectURL']; // store to be used later...
 echo $url;
@@ -170,6 +170,7 @@ echo "Result set order...\n";
 while ($row = $res->fetch_assoc()) {
     echo $row['ID'] . " " . $row['EMAIL']. " " . $row['PHONE'];
 }
+
 $link->close();
 //add code to detect if subscribed to SNS topic 
 //if not subscribed then subscribe the user and UPDATE the column in the database with a new value 0 to 1 so that then each time you don't have to resubscribe them
