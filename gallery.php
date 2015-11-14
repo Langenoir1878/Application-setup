@@ -3,6 +3,8 @@
  * Gallery.php
  * Last updated: Nov 6,2015
  */
+session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +69,24 @@
     </nav>
 
      <!--DB connection-->
-   
+   <?php 
+
+   echo "Hello";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ?>
     <!-- Page Content -->
     <div class="container">
 
