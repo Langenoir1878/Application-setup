@@ -16,6 +16,42 @@
 session_start();
 // In PHP versions earlier than 4.1.0, $HTTP_POST_FILES should be used instead
 // of $_FILES.
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+
+<style>
+.lay_content {
+    background-image: url("bg.png");
+    background-size: 1200px 571px;
+    background-color: black;
+    font-style: oblique;
+    padding: 187px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.left_side {
+    margin-left: 10px;
+    width: 98%;
+    border:1px solid #00FF00;
+}
+
+</style>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>RESULT</title>
+</head>
+
+<body>
+<div class = "lay_content">
+    <h1>File Uploading Result</h1>
+    <font color = "white"><a href = "index.php">Go back to the INDEX </a></font>
+</div>
+
+<div class = "left_side">
+<?php
 echo $_POST['useremail'];
 $uploaddir = '/tmp/';
 $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
@@ -32,13 +68,11 @@ print "</pre>";
 
 require 'vendor/autoload.php';
 
-#use Aws\S3\S3Client;
-#$client = S3Client::factory();
-
-$s3 = new Aws\S3\S3Client([
+use Aws\S3\S3Client;
+$client = S3Client::factory(array(
     'version' => 'latest',
     'region'  => 'us-east-1'
-]);
+));
 
 $bucket = uniqid("ln1878bucket-",false);
 
@@ -46,37 +80,38 @@ $bucket = uniqid("ln1878bucket-",false);
 #    'Bucket' => $bucket
 #));
 # AWS PHP SDK version 3 create bucket
-$result = $s3->createBucket([
+$result = $client->createBucket(array(
     'ACL' => 'public-read',
     'Bucket' => $bucket
-]);
+));
 
-#$client->waitUntilBucketExists(array('Bucket' => $bucket));
+$client->waitUntilBucketExists(array('Bucket' => $bucket));
 #Old PHP SDK version 2
-#$key = $uploadfile;
-#$result = $client->putObject(array(
-#    'ACL' => 'public-read',
-#    'Bucket' => $bucket,
-#    'Key' => $key,
-#    'SourceFile' => $uploadfile 
-#));
-# PHP version 3
-$result = $s3->putObject([
+$key = $uploadfile;
+$result = $client->putObject(array(
     'ACL' => 'public-read',
     'Bucket' => $bucket,
-    'Key' => $fname,
-    'SourceFile' => $uploadfile
-]);  
+    'Key' => $key,
+    'SourceFile' => $uploadfile 
+));
+# PHP version 3
+#$result = $s3->putObject([
+ #   'ACL' => 'public-read',
+  #  'Bucket' => $bucket,
+   # 'Key' => $fname,
+    #'SourceFile' => $uploadfile
+#]);  
 
 $url = $result['ObjectURL']; // store to be used later...
 echo $url;
 
-$rds = new Aws\Rds\RdsClient([
+use Aws\Rds\RdsClient;
+$client = RdsClient::factory(array(
     'version' => 'latest',
     'region'  => 'us-east-1'
-]);
+));
 
-$result = $rds->describeDBInstances([
+$result = $client->describeDBInstances(array(
     'DBInstanceIdentifier' => 'SIMMON-THE-CAT-DB',
     #'Filters' => [
     #    [
@@ -87,11 +122,11 @@ $result = $rds->describeDBInstances([
    # ],
    # 'Marker' => '<string>',
    # 'MaxRecords' => <integer>,
-]);
+));
 
 $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 
-    echo "============\n". $endpoint . "================";
+#    echo "============\n". $endpoint . "================";
 //echo "begin database";^M
 $link = mysqli_connect($endpoint,"LN1878","hesaysmeow","simmoncatdb") or die("Error " . mysqli_error($link));
 /* check connection */
@@ -141,3 +176,7 @@ $link->close();
 // add code to generate SQS Message with a value of the ID returned from the most recent inserted piece of work
 //  Add code to update database to UPDATE status column to 1 (in progress)
 ?>
+</div>
+
+</body>
+</html>
