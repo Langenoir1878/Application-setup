@@ -95,10 +95,6 @@ session_start();
         exit();
     }
 
-    //to be add =======================SELECT STATEMENT TO DISPLAY IMGS===============================================
-    //retrieving data from db, table name: CAT_TABLE
-    //NOTICE DIFFERENT FIELD NAMES: send - useremail - COLUMN "EMAIL"; retrieve - email - same column in db
-
     $link->real_query("SELECT * FROM CAT_TABLE WHERE EMAIL = '$email'");
 
     $res = $link->use_result();
@@ -117,19 +113,6 @@ session_start();
     ?>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-   ?>
     <!-- Page Content -->
     <div class="container">
 
