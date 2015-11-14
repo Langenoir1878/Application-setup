@@ -2,7 +2,6 @@
 <head><title>simple test</title>
 
 </head>
-
 <body>
 <?php
 /* Yiming ZHANG ITMO 544-01 MP-1
@@ -10,7 +9,7 @@
  * Last updated: Nov 6,2015
  */
 
-session_start();
+
 $email = $POST["email"]
 require 'vendor/autoload.php';
 
