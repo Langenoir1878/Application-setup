@@ -11,15 +11,15 @@
 
 // Start the session^M
 require 'vendor/autoload.php';
-$rds = new Aws\Rds\RdsClient([
+$rds = new Aws\Rds\RdsClient(array(
     'version' => 'latest',
     'region'  => 'us-east-1'
-]);
+));
 
 
-$result = $rds->createDBInstance([
-    'AllocatedStorage' => 10,
-    'AutoMinorVersionUpgrade' => true || false,
+#$result = $rds->createDBInstance([
+ #   'AllocatedStorage' => 10,
+  #  'AutoMinorVersionUpgrade' => true || false,
     #'AvailabilityZone' => '<string>',
     #'BackupRetentionPeriod' => <integer>,
    # 'CharacterSetName' => '<string>',
@@ -27,27 +27,29 @@ $result = $rds->createDBInstance([
    # 'DBClusterIdentifier' => '<string>',
     //'DBInstanceClass' => 'db.t1.micro', // REQUIRED
     //'DBInstanceIdentifier' => 'mp1-jrh', // REQUIRED
-  'DBInstanceClass' => 'db.t1.micro', // REQUIRED
-  'DBInstanceIdentifier' => 'SIMMON-THE-CAT-DB', // REQUIRED
+ # 'DBInstanceClass' => 'db.t1.micro', // REQUIRED
+ # ===========================================================
+ # 'DBInstanceIdentifier' => 'SIMMON-THE-CAT-DB', // REQUIRED
+ # ===========================================================
     //'DBName' => 'customerrecords',
     #'DBParameterGroupName' => '<string>',
     #'DBSecurityGroups' => ['<string>', ...],
     #'DBSubnetGroupName' => '<string>',
-    'Engine' => 'MySQL', // REQUIRED
-    'EngineVersion' => '5.5.41',
+#    'Engine' => 'MySQL', // REQUIRED
+ #   'EngineVersion' => '5.5.41',
     #'Iops' => <integer>,
     #'KmsKeyId' => '<string>',
    # 'LicenseModel' => '<string>',
   //'MasterUserPassword' => 'letmein888',
     //'MasterUsername' => 'controller',
-    'MasterUserPassword' => 'hesaysmeow',
-    'MasterUsername' => 'LN1878',
+#    'MasterUserPassword' => 'hesaysmeow',
+ #   'MasterUsername' => 'LN1878',
     #'MultiAZ' => true || false,
     #'OptionGroupName' => '<string>',
     #'Port' => <integer>,
     #'PreferredBackupWindow' => '<string>',
     #'PreferredMaintenanceWindow' => '<string>',
-   'PubliclyAccessible' => true,
+ #  'PubliclyAccessible' => true,
    #'StorageEncrypted' => true || false,
    #'StorageType' => '<string>',
    # 'Tags' => [
@@ -60,21 +62,29 @@ $result = $rds->createDBInstance([
     #'TdeCredentialArn' => '<string>',
     #'TdeCredentialPassword' => '<string>',
    # 'VpcSecurityGroupIds' => ['<string>', ...],
-]);
+#]);
 
-print "Create RDS DB results: \n";
+#print "Create RDS DB results: \n";
 # print_r($rds);
-$result = $rds->waitUntil('DBInstanceAvailable',['DBInstanceIdentifier' => 'SIMMON-THE-CAT-DB']);
+#$result = $rds->waitUntil('DBInstanceAvailable',['DBInstanceIdentifier' => 'SIMMON-THE-CAT-DB']);
 // Create a table 
-$result = $rds->describeDBInstances([
-    'DBInstanceIdentifier' => 'SIMMON-THE-CAT-DB'
-]);
+# ====================================
+#$result = $rds->describeDBInstances([
+#    'DBInstanceIdentifier' => 'SIMMON-THE-CAT-DB'
+#]);
+# ====================================
+# updated Nov 13, for testing $client
+$result = $client->describeDBInstances(array(
+	'DBInstanceIdentifier'=>'SIMMON-THE-CAT-DB'
+	));
 
 $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
-print "============\n". $endpoint . "================\n";
+#print "============\n". $endpoint . "================\n";
 
 
 $link = new mysqli($endpoint,"LN1878","hesaysmeow","simmoncatdb", 3306) or die("Error " . mysqli_error($link)); 
+
+
 #echo "Here is the result: " . $link;
 $sqlSTETEMENTstr="CREATE TABLE CAT_TABLE 
 (
@@ -89,5 +99,8 @@ STATE TINYINT(3) CHECK(STATE IN (0,1,2)),
 TIMESTR VARCHAR(50) 
 )");
 
-$con->query($sqlSTETEMENTstr);
+$link->query($sqlSTETEMENTstr);
+
+$link->close();
+
 ?>
