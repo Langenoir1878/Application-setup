@@ -85,7 +85,7 @@ $result = $client->createBucket(array(
     'Bucket' => $bucket
 ));
 
-$client->waitUntilBucketExists(array('Bucket' => $bucket));
+$client->waitUntil('BucketExists',array('Bucket' => $bucket));
 #Old PHP SDK version 2
 #$key = $uploadfile;
 #$result = $client->putObject(array(
