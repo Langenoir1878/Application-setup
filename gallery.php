@@ -1,14 +1,16 @@
+<DOCTYPE html>
+<head></head>
+<body>
 <?php
 /* Yiming ZHANG ITMO 544-01 MP-1
  * Gallery.php
- * Last updated: Nov 6,2015
+ * Last updated: Nov 15,2015
  */
 session_start();
 $email = $POST["email"];
 
-?>
 
-
+/*
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,8 +74,9 @@ $email = $POST["email"];
     <font color = "#00FF00"> <h1 class="page-header"> Photo Gallery </h1> </font>
 
     <p><font color = "white"></font><?php print "Enter the php section . . . "; ?></font></p>
-     <!--DB connection-->
-    <?php 
+    */
+    
+    
     print "HTML BODY, repeat the useremail: " . $email . "<- anything return?";
 
     require 'vendor/autoload.php';
@@ -112,17 +115,15 @@ $email = $POST["email"];
     $imageSTR = $row['ID'] . "Email: " . $row['EMAIL']; //to be used into CSS containers
     #echo $imageSTR;
     print "----------- line 114 in Gallery -----------";
+    
+     $link->close();
     }
-?>
+/*
 <font color="white">The URL of uploaded image: <?php echo $urlINFO; ?></font> <br>
 <font color = "white">The image sotred in DB: <br>
 <?php echo $imageSTR?>
 </font>
 
-<?php
-    $link->close();
-
-    ?>
 
 
     <!-- Page Content -->
@@ -135,10 +136,13 @@ $email = $POST["email"];
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+*/
+#comment out previous html frames
+?>
 
 </body>
 
- <!-- Footer -->
+
         <footer>
             <div class="row">
                 <div class="col-lg-12">

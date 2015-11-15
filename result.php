@@ -129,7 +129,8 @@ $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 echo "Endpoint: \n". $endpoint . "";
 echo "*** begin database";
 //below line occur connection errors
-$link = mysqli_connect($endpoint,"ln1878","hesaysmeow","simmoncatdb") or die("Error in line 132 in result.php, db connection error." . mysqli_error($link));
+$link = mysqli_connect($endpoint,"ln1878","hesaysmeow","simmoncatdb");
+//or die("Error in line 132 in result.php, db connection error." . mysqli_error($link));
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
@@ -145,7 +146,7 @@ $EMAIL = $_POST['useremail'];
 $PHONE = $_POST['phone']; 
 $RAWS3URL = $url; //obtained from far above..
 $IMGNAME = basename($_FILES['userfile']['name']);
-$FINISHEDS3URL = "^^^00^^^";
+$FINISHEDS3URL = "..";
 $STATE =0;
 
 date_default_timezone_set('America/Chicago');
