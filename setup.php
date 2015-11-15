@@ -86,7 +86,7 @@ $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 #print "============\n". $endpoint . "================\n";
 
 echo "begin database";
-$link = new mysqli($endpoint,"ln1878","hesaysmeow","simmoncatdb") or die("Error for DB connection" . mysqli_error($link)); 
+$link = new mysqli($endpoint,"ln1878","hesaysmeow","simmoncatdb") or die("Error in line 89 in setup.php" . mysqli_error($link)); 
 
 
 #echo "Here is the result: " . $link;

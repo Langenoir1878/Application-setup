@@ -5,6 +5,7 @@
  */
 session_start();
 $email = $POST["email"];
+
 ?>
 
 
@@ -27,18 +28,8 @@ $email = $POST["email"];
     <!-- Custom CSS -->
     <link href="css/thumbnail-gallery.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
-</head>
-
-<body background = "bg.png">
-   
-   <!-- Navigation -->
+ <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -49,7 +40,12 @@ $email = $POST["email"];
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><?php echo $email; ?></a>
+                <a class="navbar-brand" href="#">
+                    <?php 
+                        print $email; 
+                        print "Above line: reaching email from container";
+                    ?>
+                </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -70,29 +66,32 @@ $email = $POST["email"];
         
     </nav>
     
-    
-    <br>
-    <br>
-    <p><font color = "white"></font><?php print "Enter the php section ======="; ?></font></p>
+</head>
+
+<body background = "bg.png">
+    <font color = "#00FF00"> <h1 class="page-header"> Photo Gallery </h1> </font>
+
+    <p><font color = "white"></font><?php print "Enter the php section . . . "; ?></font></p>
      <!--DB connection-->
     <?php 
+    print "HTML BODY, repeat the useremail: " . $email . "<- anything return?";
 
     require 'vendor/autoload.php';
 
     use Aws\Rds\RdsClient;
-    # updated Nov 13 for simple testing basic outcomes
+    # updated Nov 15 for testing whether the frames are blocking php codes
     $client = RdsClient::factory(array(
     'version' => 'latest',
     'region'  => 'us-east-1'
     ));
     $result = $client->describeDBInstances(array(
-        'DBInstanceIdentifier' => 'simmon-the-cat-db'
+        'DBInstanceIdentifier' => 'simmon-the-cat-db',
     ));
 
     $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
-
+    //this line could be reached so far
     echo "Debugging info: begin mySQL connection after this line printed out";
-    
+    //error happens during db connection
     $link = mysqli_connect($endpoint,"ln1878","hesaysmeow","simmoncatdb") or die ("The link failed to connect to db" . mysqli_error($link));
     //check connection
     if (mysqli_connect_errno()) {
@@ -108,9 +107,11 @@ $email = $POST["email"];
         #adding effects here
     $urlINFO = "<img src =\" " . $row['RAWS3URL'] . "\" /><img src =\"" .$row['FINISHEDS3URL'] . "\"/>";
     #echo $urlINFO;
+    print "----------- line 110 in Gallery -----------";
 
     $imageSTR = $row['ID'] . "Email: " . $row['EMAIL']; //to be used into CSS containers
     #echo $imageSTR;
+    print "----------- line 114 in Gallery -----------";
     }
 ?>
 <font color="white">The URL of uploaded image: <?php echo $urlINFO; ?></font> <br>
@@ -125,47 +126,8 @@ $email = $POST["email"];
 
 
     <!-- Page Content -->
-    <div class="container">
+  
 
-        <div class="row">
-
-            <div class="col-lg-12">
-               <font color = "#00FF00"> <h1 class="page-header"> Photo Gallery </h1> </font>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                   <?php 
-                   #image src = ...
-                   #echo $urlINFO; 
-                   #display info
-                   #echo  $imageSTR; 
-			print "Container section";
-
-                   ?>
-                </a>
-        </div>
-
-        <hr>
-
-        <?php
-
-        #close $link
-         #$link->close();
-
-        ?>
-
-        
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <font color = "white" ><p>Copyright &copy; Yiming ZHANG ITMO 544 MP 2015</p></font>
-                </div>
-            </div>
-        </footer>
-
-    </div>
     <!-- /.container -->
 
     <!-- jQuery -->
@@ -175,5 +137,14 @@ $email = $POST["email"];
     <script src="js/bootstrap.min.js"></script>
 
 </body>
+
+ <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <font color = "white" ><p>Copyright &copy; Yiming ZHANG ITMO 544 MP 2015</p></font>
+                </div>
+            </div>
+        </footer>
 
 </html>

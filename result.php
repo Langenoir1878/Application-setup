@@ -34,7 +34,7 @@ session_start();
 .left_side {
     margin-left: 10px;
     width: 98%;
-    border:1px solid #00FF00;
+    border:1px solid black;
 }
 
 </style>
@@ -128,15 +128,15 @@ $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 
 echo "Endpoint: \n". $endpoint . "";
 echo "*** begin database";
-
-$link = mysqli_connect($endpoint,"ln1878","hesaysmeow","simmoncatdb") or die("Error connecting to database" . mysqli_error($link));
+//below line occur connection errors
+$link = mysqli_connect($endpoint,"ln1878","hesaysmeow","simmoncatdb") or die("Error in line 132 in result.php, db connection error." . mysqli_error($link));
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
 /* Prepared statement, stage 1: prepare */
-if (!($stmt = $link->prepare("INSERT INTO CAT_TABLE (USERNAME,EMAIL,PHONE,RAWS3URL,FINISHEDS3URL,IMGNAME,STATE,TIMESTR) VALUES (?,?,?,?,?,?,?,?)"))) {
+if (!($stmt = $link->prepare("INSERT INTO CAT_TABLE (ID,USERNAME,EMAIL,PHONE,RAWS3URL,FINISHEDS3URL,IMGNAME,STATE,TIMESTR) VALUES (NULL,?,?,?,?,?,?,?,?)"))) {
     echo "Prepare failed: (" . $link->errno . ") " . $link->error;
 }
 
@@ -145,13 +145,13 @@ $EMAIL = $_POST['useremail'];
 $PHONE = $_POST['phone']; 
 $RAWS3URL = $url; //obtained from far above..
 $IMGNAME = basename($_FILES['userfile']['name']);
-$FINISHEDS3URL = "none";
+$FINISHEDS3URL = "^^^00^^^";
 $STATE =0;
 
 date_default_timezone_set('America/Chicago');
             #$myDate = date('j M Y - h:i:s A');
 $TIMESTR= "Current time: " . date('j M Y - h:i:s A');
-
+print "line 154 in result.php can be reached if printed out. Preparing for binding";
 $stmt->bind_param("ssssssis",$USERNAME,$EMAIL,$PHONE,$RAWS3URL,$IMGNAME,$FINISHEDS3URL,$STATE,$TIMESTR);
 
 
