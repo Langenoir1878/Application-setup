@@ -8,5 +8,6 @@ load balancer name: SIMMON-THE-CAT
 launch configuration: SIMMON-CONFIG-LAUNCH
 auto-scaling-group name: SIMMON-AUTO-SCALE
 database identifier: SIMMON-THE-CAT-DB
+database-name: simmoncatdb
 master-username: LN1878
 master-password: hesaysmeow
