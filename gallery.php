@@ -37,7 +37,8 @@ $email = $POST["email"];
 </head>
 
 <body background = "bg.png">
-    <!-- Navigation -->
+   <?php
+   /* <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -48,13 +49,13 @@ $email = $POST["email"];
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">I'm a random button</a>
+                <a class="navbar-brand" href="#"><?php echo $email; ?></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">I'm also a random button</a>
+                        <a href="#">I'm a random button</a>
                     </li>
                     <li>
                         <a href="index.php">INDEX</a>
@@ -64,13 +65,15 @@ $email = $POST["email"];
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
+           
         </div>
-        <!-- /.container -->
+        
     </nav>
+    */
+    ?>
     <br>
     <br>
-    <p></p><font color = "white"></font><?php echo $email; ?></font></p>
+    <p><font color = "white"></font><?php print "Enter the php section ======="; ?></font></p>
      <!--DB connection-->
     <?php 
 
@@ -83,13 +86,13 @@ $email = $POST["email"];
     'region'  => 'us-east-1'
     ));
     $result = $client->describeDBInstances(array(
-        'DBInstanceIdentifier' => 'SIMMION-THE-CAT-DB'
+        'DBInstanceIdentifier' => 'simmon-the-cat-db'
     ));
 
     $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 
     echo "Debugging info: begin mySQL connection after this line printed out";
-    $link = mysqli_connect($endpoint,"LN1878","hesaysmeow","simmoncatdb") or die("Error " . mysqli_error($link));
+    $link = mysqli_connect($endpoint,"ln1878","hesaysmeow","simmoncatdb") or die("Error " . mysqli_error($link));
     //check connection
     if (mysqli_connect_errno()) {
         printf("Connect failed: %s\n", mysqli_connect_error());
@@ -136,7 +139,7 @@ $email = $POST["email"];
                    #echo $urlINFO; 
                    #display info
                    #echo  $imageSTR; 
-
+			print "Container section";
 
                    ?>
                 </a>

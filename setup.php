@@ -11,11 +11,15 @@
 
 // Start the session^M
 require 'vendor/autoload.php';
-$rds = new Aws\Rds\RdsClient(array(
-    'version' => 'latest',
-    'region'  => 'us-east-1'
+use Aws\Rds\RdsClient;
+#$rds = new Aws\Rds\RdsClient(array(
+ #   'version' => 'latest',
+  #  'region'  => 'us-east-1'
+#));
+$client = RdsClient::factory(array(
+  'version'=>'latest',
+  'region'=>'us-east-1'
 ));
-
 
 #$result = $rds->createDBInstance([
  #   'AllocatedStorage' => 10,
@@ -75,18 +79,18 @@ $rds = new Aws\Rds\RdsClient(array(
 # ====================================
 # updated Nov 13, for testing $client
 $result = $client->describeDBInstances(array(
-	'DBInstanceIdentifier'=>'SIMMON-THE-CAT-DB'
+	'DBInstanceIdentifier'=>'simmon-the-cat-db'
 	));
 
 $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 #print "============\n". $endpoint . "================\n";
 
-
-$link = new mysqli($endpoint,"LN1878","hesaysmeow","simmoncatdb", 3306) or die("Error " . mysqli_error($link)); 
+echo "begin database";
+$link = new mysqli($endpoint,"ln1878","hesaysmeow","simmoncatdb") or die("Error for DB connection" . mysqli_error($link)); 
 
 
 #echo "Here is the result: " . $link;
-$sqlSTETEMENTstr="CREATE TABLE CAT_TABLE 
+$sqlSTETEMENTstr='CREATE TABLE CAT_TABLE 
 (
 ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 USERNAME VARCHAR(32),
@@ -97,9 +101,13 @@ FINISHEDS3URL VARCHAR(500),
 IMGNAME VARCHAR(100),
 STATE TINYINT(3) CHECK(STATE IN (0,1,2)),
 TIMESTR VARCHAR(50) 
-)");
+)';
 
-$link->query($sqlSTETEMENTstr);
+$debug = $link->query($sqlSTETEMENTstr);
+
+if ($debug){
+  echo "CAT_TABLE created";
+} else{ echo "Create table failed"; }
 
 $link->close();
 

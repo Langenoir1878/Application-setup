@@ -103,7 +103,7 @@ $result = $client->putObject(array(
 #]);  
 
 $url = $result['ObjectURL']; // store to be used later...
-echo $url;
+echo "URL is: " . $url;
 
 use Aws\Rds\RdsClient;
 $client = RdsClient::factory(array(
@@ -112,7 +112,7 @@ $client = RdsClient::factory(array(
 ));
 
 $result = $client->describeDBInstances(array(
-    'DBInstanceIdentifier' => 'SIMMON-THE-CAT-DB',
+    'DBInstanceIdentifier' => 'simmon-the-cat-db',
     #'Filters' => [
     #    [
     #        'Name' => '<string>', // REQUIRED
@@ -127,9 +127,9 @@ $result = $client->describeDBInstances(array(
 $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 
 echo "Endpoint: \n". $endpoint . "";
-echo "begin database";
+echo "*** begin database";
 
-$link = mysqli_connect($endpoint,"LN1878","hesaysmeow","simmoncatdb") or die("Error " . mysqli_error($link));
+$link = mysqli_connect($endpoint,"ln1878","hesaysmeow","simmoncatdb") or die("Error " . mysqli_error($link));
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
