@@ -87,20 +87,20 @@ $result = $client->createBucket(array(
 
 $client->waitUntil('BucketExists',array('Bucket' => $bucket));
 #Old PHP SDK version 2
-#$key = $uploadfile;
-#$result = $client->putObject(array(
-#    'ACL' => 'public-read',
- #   'Bucket' => $bucket,
-  #  'Key' => $key,
-   # 'SourceFile' => $uploadfile 
-));
-# PHP version 3
-$result = $s3->putObject([
+$key = $uploadfile;
+$result = $client->putObject(array(
     'ACL' => 'public-read',
     'Bucket' => $bucket,
-    'Key' => $fname,
-    'SourceFile' => $uploadfile
-]);  
+    'Key' => $key,
+    'SourceFile' => $uploadfile 
+));
+# PHP version 3
+#$result = $s3->putObject([
+ #   'ACL' => 'public-read',
+  #  'Bucket' => $bucket,
+   # 'Key' => $fname,
+    #'SourceFile' => $uploadfile
+#]);  
 
 $url = $result['ObjectURL']; // store to be used later...
 echo $url;
@@ -126,8 +126,9 @@ $result = $client->describeDBInstances(array(
 
 $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 
-#    echo "============\n". $endpoint . "================";
-//echo "begin database";^M
+echo "Endpoint: \n". $endpoint . "";
+echo "begin database";
+
 $link = mysqli_connect($endpoint,"LN1878","hesaysmeow","simmoncatdb") or die("Error " . mysqli_error($link));
 /* check connection */
 if (mysqli_connect_errno()) {
@@ -151,7 +152,7 @@ date_default_timezone_set('America/Chicago');
             #$myDate = date('j M Y - h:i:s A');
 $TIMESTR= "Current time: " . date('j M Y - h:i:s A');
 
-$stmt->bind_param("ssssssis",$USERNAME, $EMAIL,$PHONE,$RAWS3URL,$IMGNAME,$FINISHEDS3URL,$STATE,$TIMESTR);
+$stmt->bind_param("ssssssis",$USERNAME,$EMAIL,$PHONE,$RAWS3URL,$IMGNAME,$FINISHEDS3URL,$STATE,$TIMESTR);
 
 
 if (!$stmt->execute()) {
@@ -163,7 +164,6 @@ $stmt->close();
 
 //display all records
 $link->real_query("SELECT * FROM CAT_TABLE");
-
 $res = $link->use_result();
 
 echo "Result set order...\n";

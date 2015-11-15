@@ -4,7 +4,8 @@
  * Last updated: Nov 6,2015
  */
 session_start();
-
+$email = $POST["email"];
+echo $email;
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +72,6 @@ session_start();
      <!--DB connection-->
     <?php 
 
-    $email = $POST["email"];
     require 'vendor/autoload.php';
 
     use Aws\Rds\RdsClient;
@@ -79,15 +79,14 @@ session_start();
     $client = RdsClient::factory(array(
     'version' => 'latest',
     'region'  => 'us-east-1'
-
     ));
-
     $result = $client->describeDBInstances(array(
         'DBInstanceIdentifier' => 'SIMMION-THE-CAT-DB'
     ));
 
     $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 
+    echo "Debugging info: begin mySQL connection after this line printed out";
     $link = mysqli_connect($endpoint,"LN1878","hesaysmeow","simmoncatdb") or die("Error " . mysqli_error($link));
     //check connection
     if (mysqli_connect_errno()) {
@@ -102,12 +101,13 @@ session_start();
     while ($row = $res->fetch_assoc()) {
         #adding effects here
     $urlINFO = "<img src =\" " . $row['RAWS3URL'] . "\" /><img src =\"" .$row['FINISHEDS3URL'] . "\"/>";
-    #echo $urlINFO;
+    echo $urlINFO;
 
     $imageSTR = $row['ID'] . "Email: " . $row['EMAIL']; //to be used into CSS containers
-    #echo $imageSTR;
+    echo $imageSTR;
     }
 
+    $link->close();
 
     ?>
 
@@ -125,9 +125,9 @@ session_start();
                 <a class="thumbnail" href="#">
                    <?php 
                    #image src = ...
-                   echo $urlINFO; 
+                   #echo $urlINFO; 
                    #display info
-                   echo  $imageSTR; 
+                   #echo  $imageSTR; 
 
 
                    ?>
@@ -139,7 +139,7 @@ session_start();
         <?php
 
         #close $link
-         $link->close();
+         #$link->close();
 
         ?>
 
