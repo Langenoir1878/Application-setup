@@ -37,8 +37,8 @@ $email = $POST["email"];
 </head>
 
 <body background = "bg.png">
-   <?php
-   /* <!-- Navigation -->
+   
+   <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -69,8 +69,8 @@ $email = $POST["email"];
         </div>
         
     </nav>
-    */
-    ?>
+    
+    
     <br>
     <br>
     <p><font color = "white"></font><?php print "Enter the php section ======="; ?></font></p>
@@ -92,7 +92,8 @@ $email = $POST["email"];
     $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 
     echo "Debugging info: begin mySQL connection after this line printed out";
-    $link = mysqli_connect($endpoint,"ln1878","hesaysmeow","simmoncatdb") or die("Error " . mysqli_error($link));
+    
+    $link = mysqli_connect($endpoint,"ln1878","hesaysmeow","simmoncatdb") or die ("The link failed to connect to db" . mysqli_error($link));
     //check connection
     if (mysqli_connect_errno()) {
         printf("Connect failed: %s\n", mysqli_connect_error());
