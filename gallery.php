@@ -5,8 +5,8 @@
  */
 session_start();
 $email = $POST["email"];
-echo $email;
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +68,9 @@ echo $email;
         </div>
         <!-- /.container -->
     </nav>
-
+    <br>
+    <br>
+    <p></p><font color = "white"></font><?php echo $email; ?></font></p>
      <!--DB connection-->
     <?php 
 
@@ -101,12 +103,18 @@ echo $email;
     while ($row = $res->fetch_assoc()) {
         #adding effects here
     $urlINFO = "<img src =\" " . $row['RAWS3URL'] . "\" /><img src =\"" .$row['FINISHEDS3URL'] . "\"/>";
-    echo $urlINFO;
+    #echo $urlINFO;
 
     $imageSTR = $row['ID'] . "Email: " . $row['EMAIL']; //to be used into CSS containers
-    echo $imageSTR;
+    #echo $imageSTR;
     }
+?>
+<font color="white">The URL of uploaded image: <?php echo $urlINFO; ?></font> <br>
+<font color = "white">The image sotred in DB: <br>
+<?php echo $imageSTR?>
+</font>
 
+<?php
     $link->close();
 
     ?>
