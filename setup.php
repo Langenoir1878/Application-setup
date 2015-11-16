@@ -88,6 +88,14 @@ $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 echo "begin database";
 $link = new mysqli($endpoint,"ln1878","hesaysmeow","simmoncatdb") or die("Error in line 89 in setup.php" . mysqli_error($link)); 
 
+/* check connection */
+
+if (mysqli_connect_errno()) {
+
+    printf("Connect failed: %s\n", mysqli_connect_error());
+
+    exit();
+  }
 
 #echo "Here is the result: " . $link;
 $sqlSTETEMENTstr='CREATE TABLE CAT_TABLE 
@@ -107,7 +115,8 @@ $debug = $link->query($sqlSTETEMENTstr);
 
 if ($debug){
   echo "CAT_TABLE created";
-} else{ echo "Create table failed"; }
+} 
+else { echo "Create table failed"; }
 
 $link->close();
 

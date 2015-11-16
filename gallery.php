@@ -1,16 +1,16 @@
-<DOCTYPE html>
-<head></head>
-<body>
+
 <?php
 /* Yiming ZHANG ITMO 544-01 MP-1
  * Gallery.php
  * Last updated: Nov 15,2015
  */
 session_start();
-$email = $POST["email"];
+$email = $_POST["email"];
+# Found this error finally on Nov 15 !!!!!!!! missed _!!!!!!!
 
 
-/*
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,8 +44,7 @@ $email = $POST["email"];
                 </button>
                 <a class="navbar-brand" href="#">
                     <?php 
-                        print $email; 
-                        print "Above line: reaching email from container";
+                        print $email ;
                     ?>
                 </a>
             </div>
@@ -53,7 +52,7 @@ $email = $POST["email"];
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">I'm a random button</a>
+                        <a href="#">Random button</a>
                     </li>
                     <li>
                         <a href="index.php">INDEX</a>
@@ -73,11 +72,12 @@ $email = $POST["email"];
 <body background = "bg.png">
     <font color = "#00FF00"> <h1 class="page-header"> Photo Gallery </h1> </font>
 
-    <p><font color = "white"></font><?php print "Enter the php section . . . "; ?></font></p>
-    */
+    <p><font color = "white"><?php print "Enter the php section . . . "; ?></font></p>
+    
+    <?php
     
     
-    print "HTML BODY, repeat the useremail: " . $email . "<- anything return?";
+    //print "HTML BODY, repeat the useremail: " . $email ;
 
     require 'vendor/autoload.php';
 
@@ -118,10 +118,10 @@ $email = $POST["email"];
     
      $link->close();
     }
-/*
+?></font>
 <font color="white">The URL of uploaded image: <?php echo $urlINFO; ?></font> <br>
 <font color = "white">The image sotred in DB: <br>
-<?php echo $imageSTR?>
+<?php echo $imageSTR; ?>
 </font>
 
 
@@ -136,9 +136,6 @@ $email = $POST["email"];
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-*/
-#comment out previous html frames
-?>
 
 </body>
 

@@ -52,7 +52,7 @@ session_start();
 
 <div class = "left_side">
 <?php
-echo $_POST['useremail'];
+echo "Email:" . $_POST['useremail'];
 $uploaddir = '/tmp/';
 $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
 $fname = $_FILES['userfile']['name'];
@@ -129,15 +129,15 @@ $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
 echo "Endpoint: \n". $endpoint . "";
 echo "*** begin database";
 //below line occur connection errors
-$link = mysqli_connect($endpoint,"ln1878","hesaysmeow","simmoncatdb");
-//or die("Error in line 132 in result.php, db connection error." . mysqli_error($link));
+$link = mysqli_connect($endpoint,"ln1878","hesaysmeow","simmoncatdb")or die("Error in line 132 in result.php, db connection error." . mysqli_error($link));
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
 /* Prepared statement, stage 1: prepare */
-if (!($stmt = $link->prepare("INSERT INTO CAT_TABLE (ID,USERNAME,EMAIL,PHONE,RAWS3URL,FINISHEDS3URL,IMGNAME,STATE,TIMESTR) VALUES (NULL,?,?,?,?,?,?,?,?)"))) {
+if (!($stmt = $link->prepare("INSERT INTO CAT_TABLE 
+    (ID,USERNAME,EMAIL,PHONE,RAWS3URL,FINISHEDS3URL,IMGNAME,STATE,TIMESTR) VALUES (NULL,?,?,?,?,?,?,?,?)"))) {
     echo "Prepare failed: (" . $link->errno . ") " . $link->error;
 }
 
