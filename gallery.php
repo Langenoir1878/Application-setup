@@ -95,7 +95,7 @@ $email = $_POST["email"];
     //this line could be reached so far
     echo "Debugging info: begin mySQL connection after this line printed out";
     //error happens during db connection
-    $link = mysqli_connect($endpoint,"ln1878","hesaysmeow","simmoncatdb") or die ("The link failed to connect to db" . mysqli_error($link));
+    $link = mysqli_connect($endpoint,"LN1878","hesaysmeow","simmoncatdb") or die ("The link failed to connect to db" . mysqli_error($link));
     //check connection
     if (mysqli_connect_errno()) {
         printf("Connect failed: %s\n", mysqli_connect_error());
