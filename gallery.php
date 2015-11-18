@@ -91,7 +91,7 @@ $email = $_POST["email"];
 
     $endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
     //this line could be reached so far
-    echo "Debugging info: begin mySQL connection after this line printed out";
+    //echo "Debugging info: begin mySQL connection after this line printed out";
     //error happens during db connection
     $link = mysqli_connect($endpoint,"LN1878","hesaysmeow","simmoncatdb") or die ("The link failed to connect to db" . mysqli_error($link));
     //check connection
@@ -106,25 +106,28 @@ $email = $_POST["email"];
     //echo "Result set order...\n";
     while ($row = $res->fetch_assoc()) {
         #adding effects here
-    $urlINFO = "<img src =\" " . $row['RAWS3URL'] . "\" /><img src =\"" .$row['FINISHEDS3URL'] . "\"/>";
+    $urlINFO = "<img src =\" " . $row['RAWS3URL'] . "\" />";
+    #$tobeadded = "<img src =\" " . $row['FINISHEDS3URL'] . "\"/>";
     #echo $urlINFO;
     #print "----------- line 110 in Gallery -----------";
 
-    $imageSTR = $row['ID'] . "Email: " . $row['EMAIL']; //to be used into CSS containers
+    $imageSTR = "#UID-" . $row['ID'] . ": " . "Email: " . $row['EMAIL']; //to be used into CSS containers
     #echo $imageSTR;
     #print "----------- line 114 in Gallery -----------";
-    
-     $link->close();
+    #$link->close();
+     
     }
 ?></font>
 <br><br>
-<font color="#00FF00">Uploaded image: <?php echo $urlINFO; ?></font> 
+<font color="#00FF00">&copy;&copy; Uploaded image: <?php echo $urlINFO; ?></font> 
 <br><br><br>
-<font color = "white">The image sotred in DB: <br>
+<font color = "white">&copy;&copy; Uuser info: <br>
 <?php echo $imageSTR; ?>
 </font>
 
-
+<?php
+    $link->close();
+?>
 
     <!-- Page Content -->
   
