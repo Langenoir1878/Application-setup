@@ -6,7 +6,7 @@
  */
 session_start();
 $email = $_POST["email"];
-# Found this error finally on Nov 15 !!!!!!!! missed _!!!!!!!
+# Found this error finally on Nov 15 !!!!!!!! missed '_'!!!!!!!
 
 
 ?>
@@ -51,9 +51,7 @@ $email = $_POST["email"];
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">Random button</a>
-                    </li>
+                    <!--deleted additional useless button on Nov 18, 2015-->
                     <li>
                         <a href="index.php">INDEX</a>
                     </li>
@@ -72,7 +70,7 @@ $email = $_POST["email"];
 <body background = "bg.png">
     <font color = "#00FF00"> <h1 class="page-header"> Photo Gallery </h1> </font>
 
-    <p><font color = "white"><?php print "Enter the php section . . . "; ?></font></p>
+    <p><font color = "white"><?php #print "Enter the php section . . . "; ?></font></p>
     
     <?php
     
@@ -110,16 +108,18 @@ $email = $_POST["email"];
         #adding effects here
     $urlINFO = "<img src =\" " . $row['RAWS3URL'] . "\" /><img src =\"" .$row['FINISHEDS3URL'] . "\"/>";
     #echo $urlINFO;
-    print "----------- line 110 in Gallery -----------";
+    #print "----------- line 110 in Gallery -----------";
 
     $imageSTR = $row['ID'] . "Email: " . $row['EMAIL']; //to be used into CSS containers
     #echo $imageSTR;
-    print "----------- line 114 in Gallery -----------";
+    #print "----------- line 114 in Gallery -----------";
     
      $link->close();
     }
 ?></font>
-<font color="white">The URL of uploaded image: <?php echo $urlINFO; ?></font> <br>
+<br><br>
+<font color="#00FF00">Uploaded image: <?php echo $urlINFO; ?></font> 
+<br><br><br>
 <font color = "white">The image sotred in DB: <br>
 <?php echo $imageSTR; ?>
 </font>
@@ -136,14 +136,14 @@ $email = $_POST["email"];
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
+<br><br><br>
 </body>
 
-
         <footer>
-            <div class="row">
+            <div align = "center">
                 <div class="col-lg-12">
-                    <font color = "white" ><p>Copyright &copy; Yiming ZHANG ITMO 544 MP 2015</p></font>
+                    <font color = "#00FF00" ><p>Copyright &copy; Yiming ZHANG ITMO 544 MP-1 2015</p></font>
+                    
                 </div>
             </div>
         </footer>
